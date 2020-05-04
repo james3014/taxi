@@ -1,3 +1,5 @@
+package ac.uk.strathclyde;
+
 /**
  * Model a location in a city.
  * 

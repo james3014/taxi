@@ -1,3 +1,5 @@
+package ac.uk.strathclyde;
+
 /**
  * Model the common elements of taxis and shuttles.
  * 

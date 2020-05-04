@@ -1,6 +1,7 @@
-import java.util.Iterator;
-import java.util.List;
+package ac.uk.strathclyde;
+
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Provide a simple demonstration of running a stage-one

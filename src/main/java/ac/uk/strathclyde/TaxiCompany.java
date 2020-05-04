@@ -1,8 +1,6 @@
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Map;
+package ac.uk.strathclyde;
+
+import java.util.*;
 
 /**
  * Model the operation of a taxi company, operating different

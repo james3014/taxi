@@ -1,3 +1,5 @@
+package ac.uk.strathclyde;
+
 /**
  * A taxi is able to carry a single passenger.
  * 

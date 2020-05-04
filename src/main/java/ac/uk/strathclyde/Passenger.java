@@ -1,3 +1,5 @@
+package ac.uk.strathclyde;
+
 /**
  * Model a passenger wishing to get from one
  * location to another.
