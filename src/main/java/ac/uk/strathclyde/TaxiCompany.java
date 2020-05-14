@@ -34,23 +34,24 @@ public class TaxiCompany
      * @param passengers The passengers requesting a pickup.
      * @return Whether a free vehicle is available.
      */
-    public boolean requestPickup(List<Passenger> passengers)
-    {
+    public boolean requestPickup(List<Passenger> passengers) {
         Vehicle vehicle = scheduleVehicle();
         //--------------------------------------------------//
-        if(vehicle.getTargetLocation()!=null){
-            throw new TaxiAlreadyDispatchedException(vehicle);
-        }
         if (vehicle != null) {
-            assignments.put(vehicle, passengers);
-            vehicle.setPickupLocation(passengers.get(0).getPickupLocation());
-            return true;
+            if (vehicle.getTargetLocation() != null) {
+                throw new TaxiAlreadyDispatchedException(vehicle);
+            }
         }
-        else {
-            return false;
+            if (vehicle != null) {
+                assignments.put(vehicle, passengers);
+                vehicle.setPickupLocation(passengers.get(0).getPickupLocation());
+                return true;
+            } else {
+                return false;
+            }
+
         }
 
-    }
 
     /**
      * A vehicle has arrived at a pickup point.
