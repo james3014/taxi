@@ -107,9 +107,4 @@ public class PassengerSource implements Actor {
         return names[i];
     }
 
-    @Test
-    public void testPickup()
-    {
-        assertEquals(true, company.requestPickup(passengers));
-    }
 }
