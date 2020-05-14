@@ -6,9 +6,10 @@ package ac.uk.strathclyde;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
  */
-public interface Actor {
+public interface Actor
+{
     /**
      * Implement the actor's behavior.
      */
-    void act();
+    public void act();
 }

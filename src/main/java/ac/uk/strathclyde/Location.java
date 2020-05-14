@@ -1,8 +1,7 @@
 package ac.uk.strathclyde;
-
 /**
  * Model a location in a city.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
  */
@@ -21,16 +20,16 @@ public class Location
     {
         if(x < 0) {
             throw new IllegalArgumentException(
-                        "Negative x-coordinate: " + x);
+                    "Negative x-coordinate: " + x);
         }
         if(y < 0) {
             throw new IllegalArgumentException(
-                        "Negative y-coordinate: " + y);
+                    "Negative y-coordinate: " + y);
         }
         this.x = x;
         this.y = y;
     }
-    
+
     /**
      * Generate the next location to visit in order to
      * reach the destination.
@@ -64,7 +63,7 @@ public class Location
         int yDist = Math.abs(destination.getY() - y);
         return Math.max(xDist, yDist);
     }
-    
+
     /**
      * Implement content equality for locations.
      * @return true if this location matches the other,
@@ -75,13 +74,13 @@ public class Location
         if(other instanceof Location) {
             Location otherLocation = (Location) other;
             return x == otherLocation.getX() &&
-                   y == otherLocation.getY();
+                    y == otherLocation.getY();
         }
         else {
             return false;
         }
     }
-    
+
     /**
      * @return A representation of the location.
      */

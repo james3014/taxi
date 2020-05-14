@@ -1,20 +1,21 @@
 package ac.uk.strathclyde;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Provide a simple demonstration of running a stage-one
  * scenario. A single passenger is created, and a pickup
  * requested. As the simulation is run, the passenger
  * should be picked up and then taken to their destination.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
  */
 public class Demo
 {
     private List<Actor> actors;
+    private int step;
 
     /**
      * Constructor for objects of class Demo
@@ -22,18 +23,21 @@ public class Demo
     public Demo()
     {
         actors = new LinkedList<>();
+        step = 0;
         reset();
     }
-    
+
     /**
      * Run the demo for a fixed number of steps.
      */
     public void run()
     {
         System.out.println("Welcome to our application!");
-        for(int step = 0; step < 100; step++) {
+        for(int i = 0; i < 500; i++){
+            step++;
             step();
         }
+        System.out.println("All journeys finished.");
     }
 
     /**
@@ -46,7 +50,7 @@ public class Demo
             actor.act();
         }
     }
-    
+
     /**
      * Reset the demo to a starting point.
      * A single taxi is created, and a pickup is
@@ -56,16 +60,10 @@ public class Demo
     public void reset()
     {
         actors.clear();
-        TaxiCompany company = new TaxiCompany();
-        Taxi taxi = new Taxi(company, new Location(10, 10));
-        List<Vehicle> vehicles = company.getVehicles();
-        vehicles.add(taxi);
-        actors.addAll(vehicles);
-        
-        Passenger passenger = new Passenger(new Location(0, 0),
-                                            new Location(10, 20));
-        if(!company.requestPickup(passenger)) {
-            throw new IllegalStateException("Failed to find a pickup.");
-        }
+        City city = new City();
+        TaxiCompany company = new TaxiCompany(city);
+        PassengerSource source = new PassengerSource(city, company);
+        actors.addAll(company.getVehicles());
+        actors.add(source);
     }
 }

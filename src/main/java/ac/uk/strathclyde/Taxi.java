@@ -1,27 +1,32 @@
 package ac.uk.strathclyde;
+import java.util.List;
 
 /**
  * A taxi is able to carry a single passenger.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
  */
 
-public class Taxi extends Vehicle
+public class Taxi extends Vehicle implements Item
 {
-    private Passenger passenger;
-    
+    private List<Passenger> passengers;
+    private int capacity = 0;
+    private int taxiId;
+
     /**
      * Constructor for objects of class Taxi
      * @param company The taxi company. Must not be null.
      * @param location The vehicle's starting point. Must not be null.
      * @throws NullPointerException If company or location is null.
      */
-    public Taxi(TaxiCompany company, Location location)
+    public Taxi(TaxiCompany company, Location location, int id)
     {
         super(company, location);
+        capacity = 5;
+        this.taxiId = id;
     }
-    
+
     /**
      * Carry out a taxi's actions.
      */
@@ -33,8 +38,8 @@ public class Taxi extends Vehicle
             Location next = getLocation().nextLocation(target);
             setLocation(next);
             if(next.equals(target)) {
-                if(passenger != null) {
-                    notifyPassengerArrival(passenger);
+                if(passengers != null) {
+                    notifyPassengerArrival(passengers);
                     offloadPassenger();
                 }
                 else {
@@ -53,9 +58,9 @@ public class Taxi extends Vehicle
      */
     public boolean isFree()
     {
-        return getTargetLocation() == null && passenger == null;
+        return getTargetLocation() == null && passengers == null;
     }
-    
+
     /**
      * Receive a pickup location. This becomes the
      * target location.
@@ -65,33 +70,42 @@ public class Taxi extends Vehicle
     {
         setTargetLocation(location);
     }
-    
+
     /**
      * Receive a passenger.
      * Set their destination as the target location.
-     * @param passenger The passenger.
+     * @param passengers The passengers.
      */
-    public void pickup(Passenger passenger)
+    public void pickup(List<Passenger> passengers)
     {
-        this.passenger = passenger;
-        setTargetLocation(passenger.getDestination());
+        if(passengers.size() > capacity) {
+            throw new IllegalStateException("Not enough seats in the taxi!");
+        }
+        this.passengers = passengers;
+        capacity -=passengers.size();
+        setTargetLocation(passengers.get(0).getDestination());
     }
 
     /**
-     * Offload the passenger.
+     * Offload the passengers.
      */
     public void offloadPassenger()
     {
-        passenger = null;
+        passengers = null;
+        capacity = 5;
         clearTargetLocation();
     }
-    
+
     /**
      * Return details of the taxi, such as where it is.
      * @return A string representation of the taxi.
      */
     public String toString()
     {
-        return "Taxi at " + getLocation();
+        return "Taxi " + getTaxiId() + " at " + getLocation() + " with " + capacity + " available seats";
+    }
+
+    public int getTaxiId() {
+        return taxiId;
     }
 }
