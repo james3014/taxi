@@ -17,6 +17,7 @@ public class Passenger implements Item
      * @param pickup The pickup location, must not be null.
      * @param destination The destination location, must not be null.
      * @throws NullPointerException If either location is null.
+     * @throws LocationClashException If pickup and destination locations are the same
      */
     public Passenger(Location pickup, Location destination, String name)
     {
@@ -25,6 +26,9 @@ public class Passenger implements Item
         }
         if(destination == null) {
             throw new NullPointerException("Destination location");
+        }
+        if(destination.equals(pickup)){
+            throw new LocationClashException(this);
         }
         this.pickup = pickup;
         this.destination = destination;

@@ -37,7 +37,11 @@ public class TaxiCompany
     public boolean requestPickup(List<Passenger> passengers)
     {
         Vehicle vehicle = scheduleVehicle();
-        if(vehicle != null) {
+        //--------------------------------------------------//
+        if(vehicle.getTargetLocation()!=null){
+            throw new TaxiAlreadyDispatchedException(vehicle);
+        }
+        if (vehicle != null) {
             assignments.put(vehicle, passengers);
             vehicle.setPickupLocation(passengers.get(0).getPickupLocation());
             return true;
@@ -45,6 +49,7 @@ public class TaxiCompany
         else {
             return false;
         }
+
     }
 
     /**
