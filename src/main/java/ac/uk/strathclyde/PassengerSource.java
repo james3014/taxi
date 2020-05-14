@@ -1,6 +1,10 @@
 package ac.uk.strathclyde;
 
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.*;
+
 
 /**
  * Periodically generate passengers.
@@ -56,6 +60,7 @@ public class PassengerSource implements Actor {
                 missedPickups++;
             }
         }
+
     }
 
     /**
@@ -86,7 +91,9 @@ public class PassengerSource implements Actor {
                             rand.nextInt(cityHeight));
         } while (pickupLocation.equals(destination));
         return new Passenger(pickupLocation, destination, generatePassengerName());
+
     }
+
 
     /**
      * Pick a random name from an array of names
@@ -98,5 +105,11 @@ public class PassengerSource implements Actor {
         Random rn = new Random();
         int i = rn.nextInt(5);
         return names[i];
+    }
+
+    @Test
+    public void testPickup()
+    {
+        assertEquals(true, company.requestPickup(passengers));
     }
 }
