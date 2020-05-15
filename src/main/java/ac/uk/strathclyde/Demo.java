@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class Demo
 {
     private List<Actor> actors;
-    private int step;
+
 
     /**
      * Constructor for objects of class Demo
@@ -23,7 +23,6 @@ public class Demo
     public Demo()
     {
         actors = new LinkedList<>();
-        step = 0;
         reset();
     }
 
@@ -33,11 +32,12 @@ public class Demo
     public void run()
     {
         System.out.println("Welcome to our application!");
-        for(int i = 0; i < 500; i++){
-            step++;
+        for(int i = 0; i < 100; i++){
             step();
         }
-        System.out.println("All journeys finished.");
+        System.out.println("All journeys finished.  " +
+                "\nStats for the day:");
+        displayStats();
     }
 
     /**
@@ -66,4 +66,11 @@ public class Demo
         actors.addAll(company.getVehicles());
         actors.add(source);
     }
+
+    public void displayStats() {
+        for(Actor actor : actors) {
+            actor.printStats();
+        }
+    }
 }
+

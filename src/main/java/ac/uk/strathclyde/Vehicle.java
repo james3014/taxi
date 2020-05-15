@@ -16,6 +16,8 @@ public abstract class Vehicle implements Actor
     private Location targetLocation;
     // Record how often the vehicle has nothing to do.
     private int idleCount;
+    private int totalTravelCount;
+    private int withPassengerCount;
 
     /**
      * Constructor of class Vehicle
@@ -35,6 +37,8 @@ public abstract class Vehicle implements Actor
         this.location = location;
         targetLocation = null;
         idleCount = 0;
+        totalTravelCount = 0;
+        withPassengerCount = 0;
     }
 
     /**
@@ -153,4 +157,15 @@ public abstract class Vehicle implements Actor
     {
         idleCount++;
     }
+
+    public void incrementTravelCount() { totalTravelCount++; }
+
+    public void incrementWithPassengerCount() { withPassengerCount++; }
+
+    public int calculateTravelToPickupCount(int total, int withPass) { return total - withPass; }
+
+    public int getTotalTravelCount() { return totalTravelCount; }
+
+    public int getWithPassengerCount() { return withPassengerCount; }
 }
+

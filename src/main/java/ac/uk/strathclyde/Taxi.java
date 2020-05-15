@@ -33,10 +33,18 @@ public class Taxi extends Vehicle implements Item
     public void act()
     {
         Location target = getTargetLocation();
+
         if(target != null) {
+            if(passengers != null) {
+                incrementWithPassengerCount();
+            }
             // Find where to move to next.
             Location next = getLocation().nextLocation(target);
+//            System.out.println("Taxi is at: " + getLocation());
+//            System.out.println("Taxi is going to: " + target);
+//            System.out.println("Distance: " + getLocation().distance(target));
             setLocation(next);
+            incrementTravelCount();//total steps travelled
             if(next.equals(target)) {
                 if(passengers != null) {
                     notifyPassengerArrival(passengers);
@@ -103,6 +111,14 @@ public class Taxi extends Vehicle implements Item
     public String toString()
     {
         return "Taxi " + getTaxiId() + " at " + getLocation() + " with " + capacity + " available seats";
+    }
+
+    public void printStats() {
+        System.out.println("Taxi No. " + getTaxiId() +
+                " - total idle time: " + getIdleCount() +
+                ", total travel time: " + getTotalTravelCount() +
+                ", total with passenger time: " + getWithPassengerCount() +
+                ", total travel to pick up time: " + calculateTravelToPickupCount(getTotalTravelCount(), getWithPassengerCount()));
     }
 
     public int getTaxiId() {

@@ -38,6 +38,11 @@ public class Shuttle extends Vehicle
     {
     }
 
+    @Override
+    public void printStats() {
+
+    }
+
     /**
      * Is the shuttle free?
      * @return Whether or not this vehicle is free.

@@ -63,6 +63,11 @@ public class PassengerSource implements Actor {
 
     }
 
+    @Override
+    public void printStats() {
+
+    }
+
     /**
      * @return The number of passengers for whom a pickup
      * could not be found.
